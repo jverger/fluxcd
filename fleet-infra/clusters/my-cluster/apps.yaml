@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: ./apps/base/podinfo
+  path: ./fleet-infra/apps/base/podinfo
   prune: true
   sourceRef:
     kind: GitRepository
