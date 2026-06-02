@@ -18,9 +18,8 @@ spec:
     replicaCount: 3
     image:
       registry: docker.io
-      repository: nginx
-      tag: "1.27"
-    initContainers: []
+      repository: bitnami/nginx
+      tag: latest
   valuesFrom:
     - kind: ConfigMap
       name: nginx-prod-values
