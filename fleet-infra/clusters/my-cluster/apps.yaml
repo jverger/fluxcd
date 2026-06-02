@@ -6,9 +6,28 @@ metadata:
 spec:
   dependsOn:
     - name: infrastructure-sources
+    - name: apps-namespaces
   interval: 5m
-  path: ./fleet-infra/apps/base/podinfo
+  path: ./kustomize
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: podinfo
+  targetNamespace: podinfo
+  patches:
+    - target:
+        kind: Deployment
+        name: podinfo
+      patch: |
+        - op: replace
+          path: /spec/replicas
+          value: 1
+    - target:
+        kind: HorizontalPodAutoscaler
+        name: podinfo
+      patch: |
+        $patch: delete
+        apiVersion: autoscaling/v2
+        kind: HorizontalPodAutoscaler
+        metadata:
+          name: podinfo
