@@ -16,6 +16,12 @@ spec:
         namespace: flux-system
   values:
     replicaCount: 3
+    image:
+      registry: docker.io
+      repository: library/nginx
+      tag: latest
+    containerPorts:
+      http: 80
   valuesFrom:
     - kind: ConfigMap
       name: nginx-prod-values
