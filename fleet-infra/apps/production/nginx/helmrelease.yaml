@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: nginx
-      version: ">=18.0.0 <19.0.0"
+      version: "18.2.4"
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -18,10 +18,9 @@ spec:
     replicaCount: 3
     image:
       registry: docker.io
-      repository: library/nginx
-      tag: latest
-    containerPorts:
-      http: 80
+      repository: nginx
+      tag: "1.27"
+    initContainers: []
   valuesFrom:
     - kind: ConfigMap
       name: nginx-prod-values
