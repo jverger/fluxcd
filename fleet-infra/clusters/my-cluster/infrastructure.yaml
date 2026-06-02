@@ -1,15 +1,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: apps
+  name: infrastructure-sources
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: infrastructure-sources
   interval: 5m
-  path: ./apps/base/podinfo
+  path: ./infrastructure/sources
   prune: true
   sourceRef:
     kind: GitRepository
-    name: podinfo
-  targetNamespace: podinfo
+    name: flux-system
