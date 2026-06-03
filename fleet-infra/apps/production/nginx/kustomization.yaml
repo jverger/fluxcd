@@ -3,4 +3,26 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - configmap.yaml
-  - helmrelease.yaml
+  - ../../base/nginx
+patches:
+  - target:
+      kind: HelmRelease
+      name: nginx
+    patch: |
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: nginx
+        namespace: web
+      spec:
+        timeout: 10m
+        values:
+          replicaCount: 3
+        valuesFrom:
+          - kind: ConfigMap
+            name: nginx-prod-values
+            valuesKey: values.yaml
+          - kind: Secret
+            name: nginx-prod-secrets
+            valuesKey: secrets.yaml
+            optional: true
