@@ -8,7 +8,7 @@ namespace: web-dev
 patches:
   - target:
       kind: HelmRelease
-      name: nginx-dev
+      name: nginx
     patch: |
       - op: replace
         path: /spec/values/replicaCount
